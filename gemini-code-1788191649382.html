@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ff6f9f" />
+  <title>이오의 믹스커미션</title>
+  <style>
+    :root {
+      --bg: #fff8fb;
+      --bg2: #fff1f6;
+      --ink: #27212b;
+      --muted: #7e7180;
+      --pink: #ff6f9f;
+      --pink-deep: #e94f87;
+      --red: #e82e54;
+      --lav: #c9b8f7;
+      --line: rgba(52, 36, 48, .12);
+      --card: rgba(255,255,255,.82);
+      --shadow: 0 24px 60px rgba(110, 62, 87, .13);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255,139,179,.20), transparent 28%),
+        radial-gradient(circle at 92% 16%, rgba(191,167,255,.19), transparent 30%),
+        linear-gradient(180deg, #fffafd 0%, var(--bg) 46%, #fff 100%);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: .18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .wrap {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 250, 253, .74);
+      border-bottom: 1px solid rgba(82, 48, 67, .08);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #645662;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover { color: var(--pink-deep); }
+
+    .nav-cta {
+      padding: 11px 17px;
+      border-radius: 999px;
+      color: #fff !important;
+      background: var(--ink);
+      box-shadow: 0 8px 18px rgba(39,33,43,.14);
+    }
+
+    .hero { padding: 62px 0 38px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.06fr .94fr;
+      align-items: center;
+      gap: 56px;
+      min-height: 520px;
+    }
+
+    .hero h1 {
+      margin: 20px 0 18px;
+      font-size: clamp(44px, 6vw, 84px);
+      line-height: .98;
+      letter-spacing: -.065em;
+      font-weight: 950;
+    }
+    .hero h1 span {
+      display: block;
+      color: var(--pink-deep);
+      text-shadow: 0 10px 30px rgba(233,79,135,.12);
+    }
+    .hero-copy {
+      max-width: 650px;
+      color: #6e606c;
+      font-size: clamp(15px, 1.4vw, 18px);
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 20px;
+      border-radius: 16px;
+      font-weight: 900;
+      transition: .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--pink), var(--red));
+      box-shadow: 0 14px 30px rgba(232,46,84,.20);
+    }
+    .btn-soft {
+      background: rgba(255,255,255,.8);
+      border: 1px solid var(--line);
+    }
+
+    .hero-visual-card {
+      position: relative;
+      padding: 40px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,240,246,0.85));
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .visual-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .visual-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--pink-deep);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .wave-container {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: var(--radius-md);
+      padding: 0 20px;
+      border: 1px solid rgba(233,79,135,0.1);
+    }
+    .wave-bar {
+      flex: 1;
+      height: 20%;
+      background: linear-gradient(180deg, var(--pink), var(--pink-deep));
+      border-radius: 99px;
+      animation: wave 1.2s ease-in-out infinite alternate;
+    }
+    .wave-bar:nth-child(2n) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(3n) { animation-delay: 0.4s; }
+    .wave-bar:nth-child(4n) { animation-delay: 0.1s; }
+    .wave-bar:nth-child(5n) { animation-delay: 0.3s; }
+
+    @keyframes wave {
+      0% { height: 15%; }
+      100% { height: 85%; }
+    }
+
+    .visual-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    section { padding: 86px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 28px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(31px, 4vw, 50px);
+      letter-spacing: -.05em;
+      line-height: 1.05;
+    }
+    .section-head p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      border: 1px solid rgba(65,45,58,.09);
+      box-shadow: 0 14px 32px rgba(80,46,67,.07);
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(233, 79, 135, 0.4);
+      box-shadow: 0 18px 36px rgba(233, 79, 135, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .price-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 250px;
+    }
+    .price-tag {
+      font-size: 28px;
+      font-weight: 950;
+      color: var(--pink-deep);
+      margin: 8px 0;
+    }
+    .price-title { font-size: 20px; font-weight: 900; }
+    .price-card ul {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .price-card li::before {
+      content: "✦";
+      margin-right: 6px;
+      color: var(--pink);
+    }
+
+    .option-banner {
+      margin-top: 20px;
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px dashed rgba(233, 79, 135, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .option-banner span { color: var(--pink-deep); }
+
+    .sample-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .sample-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow: hidden;
+    }
+    .video-thumb-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #000;
+      cursor: pointer;
+    }
+    .video-thumb-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .video-thumb-wrapper:hover img {
+      transform: scale(1.04);
+    }
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 58px;
+      height: 58px;
+      background: rgba(233, 79, 135, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .play-btn::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent #ffffff;
+      margin-left: 4px;
+    }
+    .video-thumb-wrapper:hover .play-btn {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: var(--pink-deep);
+    }
+    
+    .sample-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sample-info-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sample-info h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .tag-work {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(233, 79, 135, 0.12);
+      color: var(--pink-deep);
+      border: 1px solid rgba(233, 79, 135, 0.2);
+    }
+    .sample-info p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .sample-info b {
+      color: var(--pink-deep);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      min-height: 190px;
+      padding: 24px;
+    }
+    .step::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      display: block;
+      margin-bottom: 20px;
+      color: #eeb3c7;
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .08em;
+    }
+    .step h3 { margin: 0 0 8px; }
+    .step p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .notice {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .notice-visual {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+      color: #fff;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 80% 15%, rgba(255,255,255,.18), transparent 25%),
+        linear-gradient(145deg, #ff7aa7, #db315f);
+    }
+    .notice-visual strong {
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: -.05em;
+    }
+    .notice-list {
+      display: grid;
+      gap: 12px;
+    }
+    .notice-item {
+      display: flex;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(65,45,58,.08);
+      transition: all 0.2s ease;
+    }
+    .notice-item:hover {
+      background: #fff;
+      border-color: rgba(233, 79, 135, 0.3);
+    }
+    .notice-item b { min-width: 110px; color: var(--pink-deep); }
+    .notice-item span { color: var(--muted); font-size: 14px; word-break: keep-all; }
+    .notice-subtext {
+      display: block;
+      font-size: 12px;
+      color: #938190;
+      margin-top: 4px;
+    }
+    .notice-item.warning b { color: var(--red); }
+
+    .contact { padding-bottom: 120px; }
+    .contact-box {
+      text-align: center;
+      padding: 65px 30px;
+      border-radius: 36px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255,255,255,.13), transparent 27%),
+        radial-gradient(circle at 88% 110%, rgba(255,114,159,.25), transparent 35%),
+        #241f26;
+      box-shadow: 0 30px 65px rgba(46,31,41,.18);
+    }
+    .contact-box h2 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 5vw, 58px);
+      letter-spacing: -.05em;
+    }
+    .contact-box p {
+      margin: 0 auto 26px;
+      max-width: 600px;
+      color: rgba(255,255,255,.66);
+    }
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .contact-box .btn-kakao {
+      background: #FFE812;
+      color: #3c1e1e;
+      font-size: 16px;
+      padding: 0 32px;
+    }
+
+    footer {
+      padding: 25px 0 42px;
+      color: #958795;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 26px; }
+      .price-grid { grid-template-columns: 1fr 1fr; }
+      .sample-grid { grid-template-columns: 1fr; }
+      .process { grid-template-columns: 1fr 1fr; }
+      .notice { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(calc(100% - 26px), var(--max)); }
+      .price-grid { grid-template-columns: 1fr; }
+      .process { grid-template-columns: 1fr; }
+      .notice-item { flex-direction: column; gap: 4px; }
+      .contact-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <span>Io. MIX COMMISSION</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#price">가격 안내</a>
+        <a href="#sample">작업 샘플</a>
+        <a href="#process">작업 과정</a>
+        <a href="#notice">유의 사항</a>
+        <a class="nav-cta" href="#contact">문의하기</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- 메인 비주얼 -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1><span>Io.<br>MIX COMMISSION</span></h1>
+          <p class="hero-copy">
+            안녕하세요, 이오입니다.<br>
+            보컬 튜닝(음정/박자)부터 믹싱, 마스터링까지<br>
+            곡에 가장 어울리는 깔끔하고 매력적인 사운드로 완성해 드립니다.
+          </p>
+
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#contact">✦ 커미션 신청하기</a>
+            <a class="btn btn-soft" href="#sample">작업 샘플 들어보기</a>
+          </div>
+        </div>
+
+        <!-- 오디오 비주얼 카드 -->
+        <div class="hero-visual-card">
+          <div class="visual-header">
+            <span class="visual-badge">LIVE AUDIO MIXING</span>
+            <span style="font-weight: 800; font-size: 14px;">Io. Studio</span>
+          </div>
+          <div class="wave-container">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <div class="visual-status">
+            <span>Vocal Tune &amp; Master</span>
+            <span>✦ OPEN NOW</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 가격 안내 -->
+    <section id="price">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>PRICE &amp; TYPE</h2>
+            <p>기본 보컬 튠, 믹싱, 마스터링이 모두 포함된 가격입니다.</p>
+          </div>
+        </div>
+
+        <div class="price-grid">
+          <div class="card price-card">
+            <div>
+              <div class="price-title">솔로 커버</div>
+              <div class="price-tag">1.5</div>
+              <ul>
+                <li>보컬 1인</li>
+                <li>기본 튠 / 믹싱 / 마스터링</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card price-card">
+            <div>
+              <div class="price-title">듀엣 커버</div>
+              <div class="price-tag">2.5</div>
+              <ul>
+                <li>보컬 2인 기준</li>
+                <li>보컬 간 톤 밸런스 및 하모니 맞춤</li>
+                <li>기본 튠 / 믹싱 / 마스터링</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card price-card">
+            <div>
+              <div class="price-title">합창 커버</div>
+              <div class="price-tag">+0.5</div>
+              <ul>
+                <li>3인 이상 단체 곡</li>
+                <li>2인 기준 금액에서 인당 0.5 추가</li>
+                <li>화음 및 파트 밸런싱 작업</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card price-card">
+            <div>
+              <div class="price-title">숏폼 커버</div>
+              <div class="price-tag">0.7</div>
+              <ul>
+                <li>1분 미만 (쇼츠/릴스/틱톡)</li>
+                <li>빠른 음원 완성 추천</li>
+                <li>기본 튠 / 믹싱 / 마스터링</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="option-banner">
+          <div>🎶 <strong>추가 옵션</strong> : 녹음본 외에 별도로 <strong>인공화음 생성/추가</strong> 작업 요청 시</div>
+          <div><span>+0.3 추가금 발생</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 포트폴리오 샘플 -->
+    <section id="sample">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>SAMPLE</h2>
+            <p>직접 들으실 수 있는 믹싱 커미션 작업 샘플입니다.</p>
+          </div>
+        </div>
+
+        <div class="sample-grid">
+          <!-- 샘플 1 -->
+          <div class="card sample-card">
+            <a class="video-thumb-wrapper" href="https://www.youtube.com/watch?v=703V9AXmpGE" target="_blank" title="유튜브에서 영상 감상하기">
+              <img src="https://img.youtube.com/vi/703V9AXmpGE/maxresdefault.jpg" alt="猿芝居 썸네일" />
+              <div class="play-btn"></div>
+            </a>
+            <div class="sample-info">
+              <div class="sample-info-header">
+                <h3>猿芝居 (서투른 연극)</h3>
+                <span class="tag-work">Tune / Mix / Master</span>
+              </div>
+              <p>원곡: <b>な토리 (natori)</b> | Cover by <b>미정</b></p>
+            </div>
+          </div>
+
+          <!-- 샘플 2 -->
+          <div class="card sample-card">
+            <a class="video-thumb-wrapper" href="https://www.youtube.com/watch?v=hBHBsOZUAg4" target="_blank" title="유튜브에서 영상 감상하기">
+              <img src="https://img.youtube.com/vi/hBHBsOZUAg4/maxresdefault.jpg" alt="나는 최강 썸네일" />
+              <div class="play-btn"></div>
+            </a>
+            <div class="sample-info">
+              <div class="sample-info-header">
+                <h3>나는 최강</h3>
+                <span class="tag-work">Mix, Mastering</span>
+              </div>
+              <p>원곡: <b>Ado</b> | Cover by <b>청자화</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 작업 진행 순서 -->
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>PROCESS</h2>
+            <p>커미션 진행 순서 안내입니다. 피드백은 총 3회 제공됩니다.</p>
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="card step">
+            <h3>문의 및 파일 확인</h3>
+            <p>MR과 믹다 파일을 전달해 주시면 파일 상태 확인 후 안내해 드립니다.</p>
+          </div>
+          <div class="card step">
+            <h3>입금 및 작업 진행</h3>
+            <p>견적 확인 및 입금 완료 시 안내된 일정에 맞춰 본격적인 작업에 들어갑니다.</p>
+          </div>
+          <div class="card step">
+            <h3>피드백 (총 3회)</h3>
+            <p>1차 믹싱 샘플 전달 후 요청사항을 반영합니다. (피드백 기회 총 3회)</p>
+          </div>
+          <div class="card step">
+            <h3>최종 음원 전달</h3>
+            <p>수정이 완료된 최종 마스터링 음원(.wav)을 전달해 드리며 완료됩니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 유의 사항 -->
+    <section id="notice">
+      <div class="wrap">
+        <div class="notice">
+          <div class="notice-visual">
+            <strong>NOTICE</strong>
+            <p>신청 전 필수 확인 사항</p>
+          </div>
+          <div class="notice-list">
+            <div class="notice-item">
+              <b>녹음 파일</b>
+              <span>
+                잡음이 적고 이펙터가 적용되지 않은 상태로, 박자 및 시작점을 맞춘 <b>믹다 파일</b> 형태로 보내주셔야 합니다.
+                <small class="notice-subtext">* 믹다란? 원곡 박자와 반주에 맞춰 녹음본 트랙 시작점을 하나로 모아서 준비하는 것입니다.</small>
+              </span>
+            </div>
+            <div class="notice-item">
+              <b>피드백 횟수</b>
+              <span>피드백은 <b>총 3회</b>까지 진행 가능합니다. 세분화해서 한 번에 정리해 주시면 더욱 빠른 반영이 가능합니다.</span>
+            </div>
+            <div class="notice-item warning">
+              <b>컨펌/수정 제한</b>
+              <span>초기에 요청하신 컨펌 사항이나 곡 방향성을 <b>전면 변경/뒤집는 수준의 대규모 수정 요청 시 추가 요금이 발생하거나 작업이 거절</b>될 수 있습니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 문의하기 -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <h2>CONTACT</h2>
+          <p>믹스 커미션 신청 및 질문은 아래 카카오톡 오픈프로필로 문의해 주세요!</p>
+          <div class="contact-buttons">
+            <a class="btn btn-kakao" href="https://open.kakao.com/me/Iodesu" target="_blank">💬 카카오톡 오픈프로필 문의하기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© Io. MIX COMMISSION. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
