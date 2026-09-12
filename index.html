@@ -9,9 +9,6 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="이오의 믹스커미션">
   <meta property="og:description" content="보컬 튠, 믹싱, 마스터링 전문 이오의 믹스 커미션 페이지입니다.">
-  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ffb6c1'/%3E%3Cstop offset='100%25' stop-color='%23e94f87'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23bg)'/%3E%3Crect x='40' y='40' width='1120' height='550' rx='28' fill='none' stroke='%23ffffff' stroke-width='4' stroke-opacity='0.4'/%3E%3Ctext x='600' y='280' font-size='20' font-weight='800' fill='%23ffffff' text-anchor='middle' font-family='sans-serif' letter-spacing='4'%3EVOCAL TUNE %26 MIXING%3C/text%3E%3Ctext x='600' y='360' font-size='72' font-weight='900' fill='%23ffffff' text-anchor='middle' font-family='sans-serif'%3EIo. MIX COMMISSION%3C/text%3E%3Ctext x='600' y='440' font-size='26' font-weight='700' fill='%23ffffff' text-anchor='middle' font-family='sans-serif' opacity='0.9'%3E보컬 튜닝 · 믹싱 · 마스터링 커미션%3C/text%3E%3C/svg%3E">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
 
   <style>
     :root {
@@ -22,7 +19,6 @@
       --pink: #ff6f9f;
       --pink-deep: #e94f87;
       --red: #e82e54;
-      --lav: #c9b8f7;
       --line: rgba(52, 36, 48, .12);
       --card: rgba(255,255,255,.82);
       --shadow: 0 24px 60px rgba(110, 62, 87, .13);
@@ -48,17 +44,6 @@
 
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-
-    .noise {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 100;
-      opacity: .18;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
-      mix-blend-mode: multiply;
-    }
 
     .wrap {
       width: min(calc(100% - 40px), var(--max));
@@ -109,11 +94,6 @@
       border: 1px solid #ffd1e3 !important;
       box-shadow: 0 4px 12px rgba(233, 79, 135, 0.12) !important;
       transition: all 0.2s ease;
-    }
-    .nav-cta:hover {
-      background: #ffd5e5 !important;
-      color: #d83b74 !important;
-      transform: translateY(-1px);
     }
 
     .hero { padding: 62px 0 38px; }
@@ -351,9 +331,6 @@
       object-fit: cover;
       transition: transform 0.3s ease;
     }
-    .video-thumb-wrapper:hover img {
-      transform: scale(1.04);
-    }
     .play-btn {
       position: absolute;
       top: 50%;
@@ -367,7 +344,6 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease, background 0.2s ease;
     }
     .play-btn::after {
       content: "";
@@ -379,11 +355,8 @@
       border-color: transparent transparent transparent #ffffff;
       margin-left: 4px;
     }
-    .video-thumb-wrapper:hover .play-btn {
-      transform: translate(-50%, -50%) scale(1.1);
-      background: var(--pink-deep);
-    }
 
+    /* 포트폴리오 업로드 예정 박스 스타일 */
     .upcoming-wrapper {
       position: relative;
       width: 100%;
@@ -391,35 +364,26 @@
       height: 0;
       border-radius: var(--radius-md);
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(255, 227, 238, 0.6), rgba(255, 240, 246, 0.9));
+      background: linear-gradient(135deg, rgba(255, 230, 240, 0.6), rgba(255, 245, 248, 0.8));
       border: 2px dashed rgba(233, 79, 135, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .upcoming-content {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       color: var(--pink-deep);
-      font-weight: 800;
     }
-    .upcoming-icon {
-      font-size: 32px;
-      animation: pulse 2s infinite alternate;
+    .upcoming-text {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      opacity: 0.85;
     }
-    @keyframes pulse {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      100% { transform: scale(1.1); opacity: 1; }
-    }
-    
+
     .sample-info {
       display: flex;
       flex-direction: column;
@@ -450,18 +414,16 @@
       font-weight: 800;
       padding: 3px 8px;
       border-radius: 6px;
-      background: rgba(126, 113, 128, 0.12);
+      background: rgba(126, 113, 128, 0.1);
       color: var(--muted);
-      border: 1px solid rgba(126, 113, 128, 0.2);
+      border: 1px solid rgba(126, 113, 128, 0.18);
     }
     .sample-info p {
       margin: 0;
       font-size: 14px;
       color: var(--muted);
     }
-    .sample-info b {
-      color: var(--pink-deep);
-    }
+    .sample-info b { color: var(--pink-deep); }
 
     .process {
       display: grid;
@@ -482,7 +444,6 @@
       color: #eeb3c7;
       font-size: 13px;
       font-weight: 950;
-      letter-spacing: .08em;
     }
     .step h3 { margin: 0 0 8px; }
     .step p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -491,7 +452,6 @@
       display: grid;
       grid-template-columns: .75fr 1.25fr;
       gap: 20px;
-      align-items: stretch;
     }
     .notice-visual {
       display: flex;
@@ -501,19 +461,13 @@
       color: #fff;
       padding: 30px;
       border-radius: var(--radius-lg);
-      background:
-        radial-gradient(circle at 80% 15%, rgba(255,255,255,.18), transparent 25%),
-        linear-gradient(145deg, #ff7aa7, #db315f);
+      background: linear-gradient(145deg, #ff7aa7, #db315f);
     }
     .notice-visual strong {
       font-size: 40px;
       line-height: 1.1;
-      letter-spacing: -.05em;
     }
-    .notice-list {
-      display: grid;
-      gap: 12px;
-    }
+    .notice-list { display: grid; gap: 12px; }
     .notice-item {
       display: flex;
       gap: 14px;
@@ -521,21 +475,10 @@
       border-radius: 18px;
       background: rgba(255,255,255,.76);
       border: 1px solid rgba(65,45,58,.08);
-      transition: all 0.2s ease;
-    }
-    .notice-item:hover {
-      background: #fff;
-      border-color: rgba(233, 79, 135, 0.3);
     }
     .notice-item b { min-width: 110px; color: var(--pink-deep); }
-    .notice-item span { color: var(--muted); font-size: 14px; word-break: keep-all; }
-    .notice-subtext {
-      display: block;
-      font-size: 12px;
-      color: #938190;
-      margin-top: 4px;
-    }
-    .notice-item.warning b { color: var(--red); }
+    .notice-item span { color: var(--muted); font-size: 14px; }
+    .notice-subtext { display: block; font-size: 12px; color: #938190; margin-top: 4px; }
 
     .contact { padding-bottom: 120px; }
     .contact-box {
@@ -543,45 +486,22 @@
       padding: 65px 30px;
       border-radius: 36px;
       color: #fff;
-      background:
-        radial-gradient(circle at 12% 0%, rgba(255,255,255,.13), transparent 27%),
-        radial-gradient(circle at 88% 110%, rgba(255,114,159,.25), transparent 35%),
-        #241f26;
-      box-shadow: 0 30px 65px rgba(46,31,41,.18);
+      background: #241f26;
     }
-    .contact-box h2 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 5vw, 58px);
-      letter-spacing: -.05em;
-    }
-    .contact-box p {
-      margin: 0 auto 26px;
-      max-width: 600px;
-      color: rgba(255,255,255,.66);
-    }
-    .contact-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .contact-box h2 { margin: 0 0 12px; font-size: clamp(34px, 5vw, 58px); }
+    .contact-box p { margin: 0 auto 26px; max-width: 600px; color: rgba(255,255,255,.66); }
 
     a.btn-kakao-custom {
       background-color: #fffde7 !important;
       color: #4a3d31 !important;
       font-size: 16px;
       padding: 0 32px;
-      border: 1px solid #f6ec9a !important;
       border-radius: 16px;
       display: inline-flex;
       min-height: 52px;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-    }
-    a.btn-kakao-custom:hover {
-      background-color: #fff9c4 !important;
-      transform: translateY(-2px);
     }
 
     footer {
@@ -601,16 +521,13 @@
     }
 
     @media (max-width: 640px) {
-      .wrap { width: min(calc(100% - 26px), var(--max)); }
       .price-grid { grid-template-columns: 1fr; }
       .process { grid-template-columns: 1fr; }
       .notice-item { flex-direction: column; gap: 4px; }
-      .contact-buttons { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <div class="noise"></div>
 
   <header>
     <div class="wrap nav">
@@ -645,7 +562,6 @@
           </div>
         </div>
 
-        <!-- 오디오 비주얼 카드 -->
         <div class="hero-visual-card">
           <div class="visual-header">
             <span class="visual-badge">LIVE AUDIO MIXING</span>
@@ -750,9 +666,9 @@
         </div>
 
         <div class="sample-grid">
-          <!-- 샘플 1 -->
+          <!-- 샘플 1 (서투른 연극) -->
           <div class="card sample-card">
-            <a class="video-thumb-wrapper" href="https://www.youtube.com/watch?v=703V9AXmpGE" target="_blank" title="유튜브에서 영상 감상하기">
+            <a class="video-thumb-wrapper" href="https://www.youtube.com/watch?v=703V9AXmpGE" target="_blank">
               <img src="https://img.youtube.com/vi/703V9AXmpGE/maxresdefault.jpg" alt="猿芝居 썸네일" />
               <div class="play-btn"></div>
             </a>
@@ -765,12 +681,12 @@
             </div>
           </div>
 
-          <!-- 샘플 2 (업로드 예정) -->
+          <!-- 샘플 2 (나는 최강 삭제 -> 칸 유지 & 포트폴리오 업로드 예정) -->
           <div class="card sample-card">
             <div class="upcoming-wrapper">
               <div class="upcoming-content">
-                <span class="upcoming-icon">🎵</span>
-                <span>포트폴리오 업로드 예정</span>
+                <span style="font-size: 26px;">🎧</span>
+                <span class="upcoming-text">포트폴리오 업로드 예정</span>
               </div>
             </div>
             <div class="sample-info">
@@ -836,8 +752,8 @@
               <b>피드백 횟수</b>
               <span>피드백은 <b>총 3회</b>까지 진행 가능합니다. 세분화해서 한 번에 정리해 주시면 더욱 빠른 반영이 가능합니다.</span>
             </div>
-            <div class="notice-item warning">
-              <b>컨펌/수정 제한</b>
+            <div class="notice-item" style="border-color: rgba(232, 46, 84, 0.3);">
+              <b style="color: var(--red);">컨펌/수정 제한</b>
               <span>초기에 요청하신 컨펌 사항이나 곡 방향성을 <b>전면 변경/뒤집는 수준의 대규모 수정 요청 시 추가 요금이 발생하거나 작업이 거절</b>될 수 있습니다.</span>
             </div>
           </div>
