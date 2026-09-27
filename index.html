@@ -7,16 +7,11 @@
   
   <title>일오의 믹스커미션</title>
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="일오의 믹스커미션">
-<meta property="og:description" content="보컬 튠, 믹싱, 마스터링 전문 일오의 믹스 커미션 페이지입니다.">
-
-<meta
-  property="og:image"
-  content="https://iodesu.github.io/Io.mix_commission/og-image.png?v=2">
-<meta
-  property="og:url"
-  content="https://iodesu.github.io/Io.mix_commission/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="일오의 믹스커미션">
+  <meta property="og:description" content="보컬 튠, 믹싱, 마스터링 전문 일오의 믹스 커미션 페이지입니다.">
+  <meta property="og:image" content="https://iodesu.github.io/Io.mix_commission/og-image.png?v=2">
+  <meta property="og:url" content="https://iodesu.github.io/Io.mix_commission/">
 
   <style>
     :root {
@@ -319,25 +314,29 @@
       flex-direction: column;
       gap: 16px;
       overflow: hidden;
+      height: 100%;
     }
+    
+    /* 썸네일 박스 크기 고정 수정 부분 */
     .video-thumb-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
+      height: 220px; /* 고정 높이 지정 */
+      aspect-ratio: 16 / 9; /* 비율 유지 */
       border-radius: var(--radius-md);
       overflow: hidden;
       background: #000;
       cursor: pointer;
+      display: block;
     }
     .video-thumb-wrapper img {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* 이미지가 상자를 벗어나지 않고 꽉 차게 조절 */
       transition: transform 0.3s ease;
+    }
+    .video-thumb-wrapper:hover img {
+      transform: scale(1.05);
     }
     .play-btn {
       position: absolute;
@@ -352,6 +351,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 2;
     }
     .play-btn::after {
       content: "";
@@ -368,8 +368,8 @@
     .upcoming-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
+      height: 220px;
+      aspect-ratio: 16 / 9;
       border-radius: var(--radius-md);
       overflow: hidden;
       background: linear-gradient(135deg, rgba(255, 230, 240, 0.6), rgba(255, 245, 248, 0.8));
@@ -532,6 +532,7 @@
       .price-grid { grid-template-columns: 1fr; }
       .process { grid-template-columns: 1fr; }
       .notice-item { flex-direction: column; gap: 4px; }
+      .video-thumb-wrapper, .upcoming-wrapper { height: 180px; } /* 모바일에서 고정 높이 조정 */
     }
   </style>
 </head>
@@ -689,8 +690,7 @@
             </div>
           </div>
 
-          <!-- 샘플 2 (나는 최강 삭제 -> 지구본으로 교체) -->
-          <div class="sample-grid">
+          <!-- 샘플 2 (지구본) -->
           <div class="card sample-card">
             <a class="video-thumb-wrapper" href="https://www.youtube.com/watch?v=M3wQdYld6n8" target="_blank">
               <img src="https://img.youtube.com/vi/M3wQdYld6n8/maxresdefault.jpg" alt="지구본 썸네일" />
@@ -704,6 +704,8 @@
               <p>원곡: <b>米津玄師(Kenshi Yonezu)</b> | Cover by <b>아진</b></p>
             </div>
           </div>
+        </div>
+      </div>
     </section>
 
     <!-- 작업 진행 순서 -->
